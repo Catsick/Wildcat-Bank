@@ -135,9 +135,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
 
-        if (id == R.id.nav_item_1) {
+        if (id == R.id.nav_accounts) {
             viewPager.setCurrentItem(0);
-        } else if (id == R.id.nav_item_2) {
+        } else if (id == R.id.nav_deposits) {
             viewPager.setCurrentItem(1);
         }
         // Add more else if statements here for additional menu items
