@@ -1,10 +1,16 @@
 package com.example.maryjean.wildcatbank;
 
+import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -13,12 +19,14 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.appindexing.Action;
@@ -28,7 +36,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.net.URI;
 import java.util.ResourceBundle;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener  {
 
     /**
      * The {@link PagerAdapter} that will provide
@@ -48,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
 
+
     public void onFragmentInteraction(Uri uri){
 
     }
@@ -57,18 +67,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         TabLayout tabLayout =
                 (TabLayout) findViewById(R.id.tab_layout);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Accounts"));
-        tabLayout.addTab(tabLayout.newTab().setText("Transfers"));
-        tabLayout.addTab(tabLayout.newTab().setText("Deposits"));
-        tabLayout.addTab(tabLayout.newTab().setText("payments"));
-        tabLayout.addTab(tabLayout.newTab().setText("Spending Habits"));
-        tabLayout.addTab(tabLayout.newTab().setText("Location"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.account_icon));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.transfers_icon));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.deposits_icon));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.payment_icon));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.spending_icon));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.location_icon));
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         final PagerAdapter adapter = new TabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
@@ -76,20 +87,35 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
-        public void onTabSelected(TabLayout.Tab tab){
+            public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
             }
+
             @Override
-        public void onTabUnselected(TabLayout.Tab tab){
+            public void onTabUnselected(TabLayout.Tab tab) {
 
             }
+
             @Override
-        public void onTabReselected(TabLayout.Tab tab){
+            public void onTabReselected(TabLayout.Tab tab) {
 
             }
-        });}
+        });
+
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+
 
     public void launchDialog(View view){
         android.app.FragmentManager fm = getFragmentManager();
@@ -101,6 +127,24 @@ public class MainActivity extends AppCompatActivity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+
+        if (id == R.id.nav_item_1) {
+            viewPager.setCurrentItem(0);
+        } else if (id == R.id.nav_item_2) {
+            viewPager.setCurrentItem(1);
+        }
+        // Add more else if statements here for additional menu items
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
 
