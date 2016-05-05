@@ -137,8 +137,18 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_accounts) {
             viewPager.setCurrentItem(0);
-        } else if (id == R.id.nav_deposits) {
+        } else if (id == R.id.nav_transfers) {
             viewPager.setCurrentItem(1);
+        }
+        if (id == R.id.nav_deposits) {
+            viewPager.setCurrentItem(2);
+        } else if (id == R.id.nav_payments) {
+            viewPager.setCurrentItem(3);
+        }
+        if (id == R.id.nav_spending_habits) {
+            viewPager.setCurrentItem(4);
+        } else if (id == R.id.nav_location) {
+            viewPager.setCurrentItem(5);
         }
         // Add more else if statements here for additional menu items
 
