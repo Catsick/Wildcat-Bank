@@ -21,17 +21,6 @@
     <string name="current_dollar">$1337.00</string>
     <string name="marketBasket">Market Basket</string>
     <string name="marketBasket_dollar">$14.05</string>
-
-
-
-    <!-- Strings related to login -->
-    <!--<string name="login_form">Login Form</string>-->
-    <!--<string name="login">Login</string>-->
-    <!--<string name="password">Password</string>-->
-    <!--<string name="email">Email</string>-->
-    <!--<string name="login_progress">Login Progress</string>-->
-    <!--<string name="go_to_pin_button">Go To Pin</string>-->
-    <!--<string name="email_sign_in_button">Email Sign In</string>-->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
